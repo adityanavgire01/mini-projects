@@ -10,6 +10,7 @@ const bpmDisplay = document.getElementById("bpm-display");
 const startStopButton = document.getElementById("start-stop");
 const increaseBpmButton = document.getElementById("increase-bpm");
 const decreaseBpmButton = document.getElementById("decrease-bpm");
+const beatIndicator = document.querySelector(".beat-indicator");
 
 // Load the ticking sound
 const tickSound = new Audio("./tick.mp3"); // Adjust path if needed
@@ -23,6 +24,12 @@ function updateBpmDisplay() {
 function playTick() {
     tickSound.currentTime = 0;
     tickSound.play();
+
+    // Flash the beat indicator
+    beatIndicator.classList.add("beat-active");
+    setTimeout(() => {
+        beatIndicator.classList.remove("beat-active");
+    }, 200); // Remove the flash after 200ms for better visibility
 }
 
 // Function to start the metronome
@@ -41,16 +48,18 @@ function stopMetronome() {
 
 // Event listeners for buttons
 increaseBpmButton.addEventListener("click", () => {
-    bpm++;
-    updateBpmDisplay();
-    if (isRunning) {
-        stopMetronome();
-        startMetronome(); // Restart with new BPM
+    if (bpm < 300) { // Set max BPM
+        bpm++;
+        updateBpmDisplay();
+        if (isRunning) {
+            stopMetronome();
+            startMetronome(); // Restart with new BPM
+        }
     }
 });
 
 decreaseBpmButton.addEventListener("click", () => {
-    if (bpm > 20) { // Prevent BPM from going too low
+    if (bpm > 20) { // Set min BPM
         bpm--;
         updateBpmDisplay();
         if (isRunning) {

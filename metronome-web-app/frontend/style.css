@@ -41,8 +41,23 @@ button:hover {
     background-color: #0056b3;
 }
 
-#bpm-disaply {
+#bpm-display {
     font-size: 24px;
     font-weight: bold;
     color: #333;
+}
+
+.beat-indicator {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    background-color: #ddd;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.1s ease-in-out;
+}
+
+.beat-active {
+    background-color: #ff5733; /* flask color */
+    box-shadow: 0 0 20px rgba(255, 87, 51, 0.8);
 }
