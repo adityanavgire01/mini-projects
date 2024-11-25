@@ -11,6 +11,7 @@ const startStopButton = document.getElementById("start-stop");
 const increaseBpmButton = document.getElementById("increase-bpm");
 const decreaseBpmButton = document.getElementById("decrease-bpm");
 const beatIndicator = document.querySelector(".beat-indicator");
+const resetBpmButton = document.getElementById("reset-bpm");
 
 // Load the ticking sound
 const tickSound = new Audio("./tick.mp3"); // Adjust path if needed
@@ -76,5 +77,14 @@ startStopButton.addEventListener("click", () => {
         startMetronome();
     } else {
         stopMetronome();
+    }
+});
+
+resetBpmButton.addEventListener("click", () => {
+    bpm = 120;
+    updateBpmDisplay();
+    if (isRunning) {
+        stopMetronome();
+        startMetronome(); // restart with default BPM
     }
 });
